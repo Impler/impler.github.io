@@ -6,17 +6,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Impler&#39;s Zone">
-    <title>归档 - Impler&#39;s Zone</title>
+    <title>MyBatis TypeHandler - Impler&#39;s Zone</title>
     <meta name="author" content="Impler">
     
     
     
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="Impler's Zone">
-<meta property="og:url" content="https://impler.github.io/archives/index.html">
+    <meta name="description" content="StartFromZero-MyBatisMyBatis TypeHandlerdraft:
+
+功能介绍
+handler接口解读，包括typehandler接口、typeregistry、
+内置typehandler
+自定义typehandler
+注册typehandler
+不足：无法创建带有有参构造的handler，解决办法
+处理resultset的完整流程
+
+TypeHandler简介现实业务">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="MyBatis TypeHandler">
+<meta property="og:url" content="https://impler.github.io/2016/07/24/MyBatis-TypeHandler/index.html">
 <meta property="og:site_name" content="Impler's Zone">
+<meta property="og:description" content="StartFromZero-MyBatisMyBatis TypeHandlerdraft:
+
+功能介绍
+handler接口解读，包括typehandler接口、typeregistry、
+内置typehandler
+自定义typehandler
+注册typehandler
+不足：无法创建带有有参构造的handler，解决办法
+处理resultset的完整流程
+
+TypeHandler简介现实业务">
+<meta property="og:image" content="https://impler.github.io/StartFromZero-MyBatis/resources/images/TypeHandler-TypeHandler.png">
+<meta property="og:image" content="https://impler.github.io/StartFromZero-MyBatis/resources/images/TypeHandler-BaseTypeHandler.png">
+<meta property="og:image" content="https://github.com/Impler/StartFromZero-MyBatis/blob/master/resources/images/-hierarchy.png">
+<meta property="og:updated_time" content="2016-07-24T04:48:47.357Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Impler's Zone">
+<meta name="twitter:title" content="MyBatis TypeHandler">
+<meta name="twitter:description" content="StartFromZero-MyBatisMyBatis TypeHandlerdraft:
+
+功能介绍
+handler接口解读，包括typehandler接口、typeregistry、
+内置typehandler
+自定义typehandler
+注册typehandler
+不足：无法创建带有有参构造的handler，解决办法
+处理resultset的完整流程
+
+TypeHandler简介现实业务">
+<meta name="twitter:image" content="https://impler.github.io/StartFromZero-MyBatis/resources/images/TypeHandler-TypeHandler.png">
     
     
         
@@ -39,7 +77,7 @@
 
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="3">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">Impler&#39;s Zone</a>
@@ -57,7 +95,7 @@
             <!-- Define author's picture -->
 
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="3">
     
     
         <ul class="sidebar-buttons">
@@ -159,28 +197,21 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="3"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    
-
-<section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/07/24/MyBatis-TypeHandler/">
-                            MyBatis TypeHandler
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            MyBatis TypeHandler
+        </h1>
+    
+    <div class="post-meta">
     <time itemprop="datePublished" datetime="2016-07-24T12:06:53+08:00">
 	
 		    7月 24, 2016
@@ -189,10 +220,11 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="StartFromZero-MyBatis"><a href="#StartFromZero-MyBatis" class="headerlink" title="StartFromZero-MyBatis"></a>StartFromZero-MyBatis</h1><h2 id="MyBatis-TypeHandler"><a href="#MyBatis-TypeHandler" class="headerlink" title="MyBatis TypeHandler"></a>MyBatis TypeHandler</h2><p><em>draft:</em></p>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h1 id="StartFromZero-MyBatis"><a href="#StartFromZero-MyBatis" class="headerlink" title="StartFromZero-MyBatis"></a>StartFromZero-MyBatis</h1><h2 id="MyBatis-TypeHandler"><a href="#MyBatis-TypeHandler" class="headerlink" title="MyBatis TypeHandler"></a>MyBatis TypeHandler</h2><p><em>draft:</em></p>
 <ul>
 <li>功能介绍</li>
 <li>handler接口解读，包括typehandler接口、typeregistry、</li>
@@ -379,72 +411,70 @@
 <h5 id="Mapper文件配置"><a href="#Mapper文件配置" class="headerlink" title="Mapper文件配置"></a>Mapper文件配置</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"xxx"</span> <span class="attr">property</span>=<span class="string">"xxx"</span> </span></div><div class="line">	<span class="attr">typeHandler</span>=<span class="string">"xxx"</span> <span class="attr">javaType</span>=<span class="string">"xxx"</span> <span class="attr">jdbcType</span>=<span class="string">"xxx"</span> /&gt;</div></pre></td></tr></table></figure>
 <h5 id="注解配置"><a href="#注解配置" class="headerlink" title="注解配置"></a>注解配置</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@MappedTypes</span>(&#123;XXX.class, XXX.class&#125;)</div><div class="line"><span class="meta">@MappedJdbcTypes</span>(value=&#123;JdbcType.XXX,JdbcType.XXX&#125;,includeNullJdbcType=<span class="keyword">true</span>/<span class="keyword">false</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XXX</span> <span class="keyword">extends</span> <span class="title">BaseTypeHandler</span>&lt;<span class="title">XXX</span>&gt; </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="TypeHandler的注册时机"><a href="#TypeHandler的注册时机" class="headerlink" title="TypeHandler的注册时机"></a>TypeHandler的注册时机</h4><h4 id="TypeHandler的匹配"><a href="#TypeHandler的匹配" class="headerlink" title="TypeHandler的匹配"></a>TypeHandler的匹配</h4>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/07/24/MyBatis-TypeHandler/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/20/hello-world/" data-tooltip="Hello World">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://impler.github.io/2016/07/24/MyBatis-TypeHandler/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://impler.github.io/2016/07/24/MyBatis-TypeHandler/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://impler.github.io/2016/07/24/MyBatis-TypeHandler/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
             
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/07/20/hello-world/">
-                            Hello World
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-07-20T20:41:09+08:00">
-	
-		    7月 20, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
+                <a class="post-action-btn btn btn--default" href="#">
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h3 id="Hey-man-what’s-wrong-with-you…"><a href="#Hey-man-what’s-wrong-with-you…" class="headerlink" title="Hey man, what’s wrong with you…"></a>Hey man, what’s wrong with you…</h3>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/07/20/hello-world/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
-        
-        
-        <li class="pagination-number">第 1 页 共 1 页</li>
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+            
+        
+    </div>
+</article>
 
 
 
@@ -455,6 +485,83 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/20/hello-world/" data-tooltip="Hello World">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://impler.github.io/2016/07/24/MyBatis-TypeHandler/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://impler.github.io/2016/07/24/MyBatis-TypeHandler/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://impler.github.io/2016/07/24/MyBatis-TypeHandler/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://impler.github.io/2016/07/24/MyBatis-TypeHandler/">
+                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://impler.github.io/2016/07/24/MyBatis-TypeHandler/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://impler.github.io/2016/07/24/MyBatis-TypeHandler/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
             
         </div>
         
@@ -489,6 +596,8 @@
     <!--SCRIPTS-->
 <script src="/assets/js/script-i4qo6jx6jji9fg0dftpya6ivemizsbow4fhow76d8dwpm7m1wbvi378ssumx.min.js"></script>
 <!--SCRIPTS END-->
+
+    
 
 
 
